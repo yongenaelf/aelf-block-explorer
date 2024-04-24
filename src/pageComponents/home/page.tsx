@@ -19,10 +19,10 @@ import Latest from './_components/Latest';
 import TPSChart from './_components/TPSChart';
 import tpsData from './mock';
 import useResponsive, { useMobileAll } from '@_hooks/useResponsive';
+import { useEnvContext } from 'next-runtime-env';
 const BannerPc = '/image/banner_pc.png';
 const BannerMobile = '/image/banner_mobile.png';
 const clsPrefix = 'home-container';
-const HOST = process.env.NEXT_PUBLIC_API_URL;
 
 interface IProps {
   overviewSSR: IOverviewSSR;
@@ -39,6 +39,7 @@ const getConnectionBuilder = (url: string) => {
   return connect;
 };
 export default function Home({ overviewSSR }: IProps) {
+  const { NEXT_PUBLIC_API_URL: HOST } = useEnvContext();
   const isMobile = useMobileAll();
   const OverView: React.FC = () => {
     const [connection, setConnection] = useState<null | HubConnection>(null);
